@@ -1,3 +1,4 @@
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
@@ -32,6 +33,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new CopyWebpackPlugin([
+      './src/manifest.json',
+    ]),
     new HtmlWebPackPlugin({
       template: './src/index.pug',
       filename: './index.html',
