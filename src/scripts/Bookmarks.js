@@ -1,8 +1,6 @@
 class Bookmarks {
   constructor() {
     this.currentItems = [];
-
-    this.container = null;
     this.bookmarksGetter = null;
   }
 
@@ -13,8 +11,10 @@ class Bookmarks {
 
         this.render();
       })
-      .catch(() => {
+      .then(() => this.attachEventListeners())
+      .catch((err) => {
         console.error('Oops.. Something went wrong :(');
+        console.error(err);
       });
   }
 

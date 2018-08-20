@@ -1,7 +1,8 @@
 import {
   D,
-  $,
+  $$,
   bms,
+  bookmarksContainer,
 } from './globals';
 import { recentsDummyData } from '../dummy-data';
 import Bookmarks from './Bookmarks';
@@ -10,9 +11,12 @@ class RecentBookmarks extends Bookmarks {
   constructor() {
     super();
 
+    this.seeAll = {
+      title: 'See All Bookmarks',
+      parentId: '0',
+      class: 'see-all',
+    };
     this.defaultNoOfRecents = 9;
-
-    this.container = $('#recents');
     this.bookmarksGetter = this.getter();
   }
 
@@ -30,7 +34,7 @@ class RecentBookmarks extends Bookmarks {
       }
 
       // For see all bookmarks
-      items.push({ title: 'See All Bookmarks' }); 
+      items.push(this.seeAll);
 
       return (items.length > 1)
         ? resolve(items)
@@ -49,11 +53,22 @@ class RecentBookmarks extends Bookmarks {
     const div = D.createElement('div');
     const text = D.createTextNode(bookmark.title);
 
-    item.href = bookmark.url;
+    item.classList.toggle(bookmark.class, bookmark.class);
+
+    item.href = bookmark.url || '';
+
     item.appendChild(div);
     div.appendChild(text);
 
-    this.container.appendChild(item);
+    bookmarksContainer.appendChild(item);
+  }
+
+  attachEventListeners() {
+    $$(`.${this.seeAll.class}`).on('click', (e) => {
+      e.preventDefault();
+
+      console.log(e);
+    });
   }
 }
 
