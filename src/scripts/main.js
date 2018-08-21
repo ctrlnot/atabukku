@@ -1,11 +1,9 @@
 import overrideNodelist from './nodelist-override';
-import RecentBookmarks from './RecentBookmarks';
+import Atabukku from './Atabukku';
 
 // Sorry idk what to name it :(
 overrideNodelist();
 
 export default () => {
-  const recents = new RecentBookmarks();
-
-  recents.getBookmarks();
+  const atabukku = new Atabukku();
 };
